@@ -1,1 +1,11 @@
 
+.container {
+    display: grid;
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+    grid-template-columns: repeat(24,auto);
+    grid-template-rows: repeat(24,auto);
+    margin: auto;
+}
+

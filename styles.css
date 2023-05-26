@@ -1,11 +1,54 @@
 
+.game {
+    position: absolute;
+    top: 5%;
+    right: 40%;
+}
+.top {
+    width:400px;
+    height: 25px;
+    margin-top: 100%;
+    padding: 15px 0;
+    margin:auto;
+    color: white;
+    border: solid 1px #FCB1A6;
+    background-color:#FB6376;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    
+}
+.credit {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    background-color: #FB6376;
+}
 .container {
     display: grid;
     height: 400px;
     width: 400px;
-    border: 1px solid black;
+    border: 1px solid #FCB1A6;
     grid-template-columns: repeat(24,auto);
     grid-template-rows: repeat(24,auto);
     margin: auto;
 }
-
+#retry{
+    margin: auto;
+    background-color: #FB6376; 
+    border: 1px solid #FCB1A6;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    width:100px;
+}
+.buttons{
+    padding: 15px 150px;
+}
+.game_modes {
+    margin:auto;
+    width:157px;
+    padding: 30px;
+}

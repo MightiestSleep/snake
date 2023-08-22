@@ -1,3 +1,4 @@
+
 function genApple()
 {
     var randomNumber = Math.floor(Math.random()*576);
@@ -23,28 +24,73 @@ function controller()
     
     
 }
+
 function reset_game()
 {
-    const cells = document.querySelectorAll('.cell');
-
-    for(let i = 0; i<cells.length;i++)
+    //the_controller = setInterval(controller,SPEED);
+    const bta = document.querySelector("#retry");
+    if (bta.innerHTML == "Begin")
     {
         
-        cells[i].style.background = "white";
-
+        the_controller = setInterval(controller,SPEED);
+        bta.innerHTML = "Retry";
     }
-    queue.length = 3;
-    queue.push('#id_55');
-    queue.push('#id_79');
-    queue.push('#id_103');
-    MOVEMENT = "down";
-    genApple();
-    queue.length = 3;
-    CURRENT_POSITION = queue[queue.length-1];
-    PLAY = true;
+    else
+    {
+        
+        the_controller = clearInterval(the_controller);
+        const cells = document.querySelectorAll('.cell');
+
+        for(let i = 0; i<cells.length;i++)
+        {
+            
+            cells[i].style.background = "white";
+
+        }
+        queue.length = 3;
+        queue.push('#id_55');
+        queue.push('#id_79');
+        queue.push('#id_103');
+        MOVEMENT = "down";
+        genApple();
+        queue.length = 3;
+        CURRENT_POSITION = queue[queue.length-1];
+        PLAY = true;   
+            
     
-    SCORE = 0;
-    SCR.innerHTML = "Score: " + SCORE;
+        
+        
+        SCORE = 0;
+        SCR.innerHTML = "Score: " + SCORE;
+        const spd = document.querySelector('#spad');
+        
+        console.log(spd.value);
+        
+        if(spd.value == "low")
+        {
+            console.log("are we here?");
+            //clearInterval(the_controller);
+            SPEED = 100;
+            
+        }
+        if(spd.value== "medium")
+        {
+            SPEED = 70;
+        }
+        if(spd.value == "high")
+        {
+            SPEED = 40;
+        }
+        console.log(SPEED.toString());
+
+        //setInterval(controller, SPEED);
+        if(!the_controller)
+        {
+            the_controller = setInterval(controller, SPEED);
+        }
+        
+    }
+    
 }
 
 function findNextID(action)
@@ -84,7 +130,7 @@ function findNextID(action)
         else if(next_item.style.background == 'black')
         {
             PLAY = false;
-            SCR.innerHTML = "Game over!";
+            SCR.innerHTML = "Final score: " + SCORE.toString();
         }
 
         else {
@@ -120,7 +166,8 @@ function findNextID(action)
        else if(next_item.style.background == 'black')
         {
             PLAY = false;
-            SCR.innerHTML = "Game over!";
+            
+            SCR.innerHTML = "Final score: " + SCORE.toString();
         }
        else {
            next_item.style.background = 'black';
@@ -158,7 +205,7 @@ function findNextID(action)
        else if(next_item.style.background == 'black')
         {
             PLAY = false;
-            SCR.innerHTML = "Game over!";
+            SCR.innerHTML = "Final score: " + SCORE.toString();
         }
        else {
            next_item.style.background = 'black';
@@ -192,7 +239,7 @@ function findNextID(action)
        else if(next_item.style.background == 'black')
         {
             PLAY = false;
-            SCR.innerHTML = "Game over!";
+            SCR.innerHTML = "Final score: " + SCORE.toString();
         }
        else {
            next_item.style.background = 'black';
@@ -218,8 +265,7 @@ queue.push('#id_103');
 let CURRENT_POSITION = queue[queue.length-1];
 let SCORE = queue.length - 3;
 let PLAY = true;
-let SPEED = 60;
-
+let SPEED = 100;
 
 const container = document.querySelector('.container');
 for(let i=0;i<576;i++)
@@ -240,51 +286,74 @@ const btb = document.querySelector(queue[2]);
 btb.style.background = 'black';
 genApple();
 
-
+var ar = [];
+document.addEventListener("keyup",function(e) {
+    if(ar.length != 0)
+    {
+        ar.pop();
+    }
+})
 document.addEventListener("keydown",function(e) {
-    if(e.key == "s")
-    {
-        
-        if(MOVEMENT != 'up')
+    console.log(ar.length);
+    ar.push(1);
+        if(e.key == "s")
         {
-            MOVEMENT = 'down';
+            
+                if(MOVEMENT != 'up')
+                {
+                    MOVEMENT = 'down';
+                }
+            
+            //ar.pop();
         }
-        
-    }
-    if(e.key == "w")
-    {
-        //alert("Found it");
-        if(MOVEMENT != 'down')
+        if(e.key == "w")
         {
-            MOVEMENT = 'up';
+            //alert("Found it");
+            
+            
+                if(MOVEMENT != 'down')
+                {
+                    MOVEMENT = 'up';
+                }
+            
+            //ar.pop();
         }
-        
-    }
     
-    if(e.key == "a")
-    {
-        //alert("Found it");
-       
-        if(MOVEMENT != 'right')
+        if(e.key == "a")
         {
-            MOVEMENT = 'left';
+            //alert("Found it");
+        
+            
+            
+                if(MOVEMENT != 'right')
+                {
+                    MOVEMENT = 'left';
+                }
+            
+            //ar.pop();
         }
-    }
-    if(e.key == "d")
-    {
-        //alert("Found it");
-        if(MOVEMENT != 'left')
+        if(e.key == "d")
         {
-            MOVEMENT = 'right';
+            //alert("Found it");
+            
+                if(MOVEMENT != 'left')
+                {
+                    MOVEMENT = 'right';
+                }
+            
+            //ar.pop();
+            
         }
-    }
     
 })
+
+
+
 
 const btn = document.querySelector('#retry');
 btn.addEventListener('click', reset_game);
 const SCR = document.querySelector('.top');
 SCR.innerHTML = "Score: " + SCORE.toString();
 
-const the_controller = setInterval(controller, SPEED);
+
 
